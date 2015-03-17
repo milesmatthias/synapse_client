@@ -4,14 +4,6 @@ require 'synapse_client/error'
 module SynapseClient
   class Request
 
-    # TODO - if we ever turn this into a gem, this shouldn't depend on rails
-    # if Rails.env.development? || ENV["STAGING_SERVER"]
-    if ENV["STAGING_SERVER"]
-      BASE_URL = "https://sandbox.synapsepay.com"
-    else
-      BASE_URL = "https://synapsepay.com"
-    end
-
     attr_reader :user_access_token
     attr_reader :user_refresh_token
     attr_reader :client_id
@@ -99,13 +91,11 @@ module SynapseClient
 
   private
     def url_for_path(path = "")
-      ret = BASE_URL + path
-
       if @client.is_dev
-        ret = ret + "?is_dev=true"
+        ["https://sandbox.synapsepay.com", path, "?is_dev=true"].join
+      else
+        ["https://synapsepay.com", path].join
       end
-
-      ret
     end
 
   end
