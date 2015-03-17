@@ -12,7 +12,7 @@ module SynapseClient
     def initialize(options = {})
       options.to_options!.compact
 
-      @is_dev        = options[:devmode] || Rails.env.development? rescue false
+      @is_dev        = options[:devmode] #|| Rails.env.development? rescue false FIXME
       @merchant      = SynapseClient::Merchant.new(options)
       @user          = SynapseClient::User.new(options)
     end

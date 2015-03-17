@@ -5,7 +5,8 @@ module SynapseClient
   class Request
 
     # TODO - if we ever turn this into a gem, this shouldn't depend on rails
-    if Rails.env.development? || ENV["STAGING_SERVER"]
+    # if Rails.env.development? || ENV["STAGING_SERVER"]
+    if ENV["STAGING_SERVER"]
       BASE_URL = "https://sandbox.synapsepay.com"
     else
       BASE_URL = "https://synapsepay.com"
