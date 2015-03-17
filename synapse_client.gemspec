@@ -8,6 +8,5 @@ Gem::Specification.new do |s|
   s.email       = "miles.matthias@gmail.com"
   s.homepage    = "https://github.com/milesmatthias/synapse_client"
   s.license     = "MIT"
-  #s.add_dependency(%q<rest-client>, ["~> 1.7.2"])
   s.add_runtime_dependency 'rest-client', '~> 1.7', '>= 1.7.2'
 end
