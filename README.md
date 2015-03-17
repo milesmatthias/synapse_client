@@ -1,8 +1,4 @@
-[![Build Status](https://travis-ci.org/milesmatthias/synapse_client.png?branch=master)](https://travis-ci.org/milesmatthias/synapse_client) 
-
-[![Gem Version](https://badge.fury.io/rb/synapse_client.png)](http://badge.fury.io/rb/synapse_client)
-
-[![Coverage Status](https://coveralls.io/repos/milesmatthias/synapse_client/badge.png)](https://coveralls.io/r/milesmatthias/synapse_client)
+[![Build Status](https://travis-ci.org/milesmatthias/synapse_client.png?branch=master)](https://travis-ci.org/milesmatthias/synapse_client)  [![Gem Version](https://badge.fury.io/rb/synapse_client.png)](http://badge.fury.io/rb/synapse_client) [![Coverage Status](https://coveralls.io/repos/milesmatthias/synapse_client/badge.png)](https://coveralls.io/r/milesmatthias/synapse_client)
 
 # synapse_client
 
