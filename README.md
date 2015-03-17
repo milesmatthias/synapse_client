@@ -8,6 +8,9 @@ I ripped originally wrote this in a rails app of mine and stripped this out. The
 
 ## TODO
 
+* SynapseClient::VERSION in: `synapse_client/lib/synapse_client/version.rb`
+* `attr_reader :dev, alias_method: dev?`
+
 # todo list
 
 * client is_dev strategy
