@@ -103,6 +103,6 @@ _See the specs for the most up to date usage demo._
 
 # Links
 
-* dev.synapsepay.com
-* rubygems.org/gems/synapse_client
+* [dev.synapsepay.com](http://dev.synapsepay.com)
+* [rubygems.org/gems/synapse_client](https://rubygems.org/gems/synapse_client)
 
