@@ -3,30 +3,38 @@ require 'spec_helper'
 describe SynapseClient::Customer do
 
   before(:each) do
-    SynapseClient.client_id     = test_credentials[:client_id]
-    SynapseClient.client_secret = test_credentials[:client_secret]
-    SynapseClient.dev           = test_credentials[:dev]
+    @dummy_customer_data = dummy_customer_data
+    @customer = SynapseClient::Customer.create(@dummy_customer_data)
   end
 
 
   describe "creating a customer" do
-    it "should successfully return tokens and other info." do
-      response = SynapseClient::Customer.create(dummy_user_data)
+    it "should successfully return a customer object with tokens and other info." do
+      expect(@customer).to be_a SynapseClient::Customer
 
-      expect(response.success).to be true
-      expect(response.expires_in).to be_a Fixnum
+      expect(@customer.email).to be @dummy_customer_data.email
+      expect(@customer.fullname).to be @dummy_customer_data.fullname
+      expect(@customer.phonenumber).to be @dummy_customer_data.phonenumber
+      expect(@customer.ip_address).to be @dummy_customer_data.ip_address
 
-      expect(response.access_token).to be_a String
-      expect(response.reason).to be_a String
-      expect(response.refresh_token).to be_a String
-      expect(response.username).to be_a String
-
-      expect(response.access_token).not_to be_nil
-      expect(response.reason).not_to be_nil
-      expect(response.refresh_token).not_to be_nil
-      expect(response.username).not_to be_nil
+      expect(@customer.access_token).to be_a String
+      expect(@customer.refresh_token).to be_a String
+      expect(@customer.expires_in).to be_a Fixnum
+      expect(@customer.username).to be_a String
     end
+  end
 
+  describe "retrieving a customer" do
+    it "should successfully return a customer object with tokens and other info." do
+      customer = SynapseClient::Customer.retrieve(@customer.access_token)
+
+      expect(customer).to be_a SynapseClient::Customer
+
+      expect(customer.id).to be_a Fixnum
+      expect(customer.email).to eq @dummy_customer_data.email
+      expect(customer.fullname).to eq @dummy_customer_data.fullname
+      expect(customer.phonenumber).to eq @dummy_customer_data.phonenumber
+    end
   end
 
 end

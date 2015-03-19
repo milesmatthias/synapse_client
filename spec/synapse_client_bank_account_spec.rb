@@ -3,48 +3,40 @@ require 'spec_helper'
 describe SynapseClient::BankAccount do
 
   before(:each) do
-    SynapseClient.client_id     = test_credentials[:client_id]
-    SynapseClient.client_secret = test_credentials[:client_secret]
-    SynapseClient.dev           = test_credentials[:dev]
+    @customer = get_dummy_customer
   end
 
 
   describe "adding a bank account" do
     it "should successfully return tokens and other info." do
-      tokens = get_dummy_user_tokens
+      bank_account = @customer.bank_accounts.add(dummy_add_bank_account_info)
 
-      expect(response.success).to be true
-      expect(response.expires_in).to be_a Fixnum
+      expect(bank_account).to be_a SynapseClient::BankAccount
 
-      expect(response.access_token).to be_a String
-      expect(response.reason).to be_a String
-      expect(response.refresh_token).to be_a String
-      expect(response.username).to be_a String
-
-      expect(response.access_token).not_to be_nil
-      expect(response.reason).not_to be_nil
-      expect(response.refresh_token).not_to be_nil
-      expect(response.username).not_to be_nil
+      expect(bank_account.account_num).to be_a String
+      expect(bank_account.routing_num).to be_a String
+      expect(bank_account.nickname).to be_a String
+      expect(bank_account.account_type).to be_a String
+      expect(bank_account.account_class).to be_a String
     end
   end
 
-
   describe "linking a bank account" do
-    it "should successfully return tokens and other info." do
-      tokens = get_dummy_user_tokens
+    it "should successfully return bank accounts." do
+      bank_accounts = @customer.bank_accounts.link(dummy_link_bank_account_info)
 
-      expect(response.success).to be true
-      expect(response.expires_in).to be_a Fixnum
+      expect(bank_accounts).to be_a Array
+      expect(bank_accounts.count).to be > 0
 
-      expect(response.access_token).to be_a String
-      expect(response.reason).to be_a String
-      expect(response.refresh_token).to be_a String
-      expect(response.username).to be_a String
-
-      expect(response.access_token).not_to be_nil
-      expect(response.reason).not_to be_nil
-      expect(response.refresh_token).not_to be_nil
-      expect(response.username).not_to be_nil
+      bank_accounts.each do |ba|
+        expect(ba.account_number_string).to be_a String
+        expect(ba.routing_number_string).to be_a String
+        expect(ba.bank_name).to be_a String
+        expect(ba.nickname).to be_a String
+        expect(ba.name_on_account).to be_a String
+        expect(ba.account_type).to be_a String
+        expect(ba.account_class).to be_a String
+      end
     end
   end
 

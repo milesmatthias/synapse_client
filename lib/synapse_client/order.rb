@@ -36,6 +36,8 @@ module SynapseClient
       @seller_id     = options[:seller_id]     || options[:seller].delete("seller_id") rescue nil
     end
 
+    # TODO - raise error if SynapseClient.merchant_synapse_id is not set.
+    # TODO - always send :bank_pay => true
 
     def submit(client)
       data = {

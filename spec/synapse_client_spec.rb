@@ -30,8 +30,8 @@ describe SynapseClient do
       expect(SynapseClient.api_url).to eq("https://sandbox.synapsepay.com")
     end
 
-    it "should append a path to the url" do
-      expect(SynapseClient.api_url("/foo")).to eq("https://sandbox.synapsepay.com/foo")
+    it "should append a path to the url with a trailing slash" do
+      expect(SynapseClient.api_url("/foo")).to eq("https://sandbox.synapsepay.com/foo/")
     end
   end
 
@@ -39,22 +39,22 @@ describe SynapseClient do
   describe "base request method" do
     it "should raise an error when api keys are absent" do
       SynapseClient.client_id = nil
-      expect { SynapseClient.request("get", "/users") }.to raise_error
+      expect { SynapseClient.request("get", "users") }.to raise_error
     end
 
     it "should raise an error when api keys contain whitespace" do
       SynapseClient.client_id = " foo bar "
-      expect { SynapseClient.request("get", "/users") }.to raise_error
+      expect { SynapseClient.request("get", "users") }.to raise_error
     end
 
     it "should be able to do a basic get of bank statuses" do
       response = SynapseClient.request("get", "/api/v2/bankstatus/show/")
 
-      expect(response).to be_an(Hash)
-      expect(response.success).to be true
+      expect(response).to be_an(SynapseClient::APIOperations::Response)
+      expect(response.successful?).to be true
 
-      expect(response.banks).to be_an(Array)
-      expect(response.banks.count).to be > 0
+      expect(response.data.banks).to be_an(Array)
+      expect(response.data.banks.count).to be > 0
     end
   end
 

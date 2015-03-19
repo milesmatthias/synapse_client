@@ -2,6 +2,8 @@
 
 require "map"
 require "restclient"
+require "synapse_client/api_resource"
+require "synapse_client/api_operations/response"
 require "synapse_client/bank_account"
 require "synapse_client/client"
 require "synapse_client/error"
@@ -20,16 +22,22 @@ module SynapseClient
 
   class << self
     attr_accessor :client_id, :client_secret
-    attr_accessor :merchant_oauth_key, :merchant_email
+    attr_accessor :merchant_oauth_key, :merchant_email, :merchant_synapse_id
     attr_accessor :dev
     alias_method :dev?, :dev
+  end
+
+  def self.ensure_trailing_slash(url='')
+    return url if url.empty?
+    return url if url[-1] == "/"
+    return url + "/"
   end
 
   def self.api_url(url='')
     base_api_url = "https://synapsepay.com"
     base_api_url = "https://sandbox.synapsepay.com" if dev?
 
-    base_api_url + url
+    base_api_url + ensure_trailing_slash(url)
   end
 
   def self.request(method, path, params={}, headers={}, client_id=nil, client_secret=nil, api_base_url=nil)
@@ -58,16 +66,19 @@ module SynapseClient
           payload = params.to_query
           headers[:content_type] = "application/x-www-form-urlencoded"
         else
-          payload = params.to_json
+          payload = creds(client_id, client_secret).update(params)
+          payload[:oauth_consumer_key] = params[:access_token] if params[:access_token]
+          payload = payload.to_json
           headers[:content_type] = :json
         end
       end
 
     #
       request_opts = {
-        :headers => request_headers(client_id, client_secret).update(headers),
+        :headers => headers,
         :method => method, :open_timeout => 30,
-        :payload => payload, :url => url, :timeout => 80
+        :payload => payload,
+        :url => url, :timeout => 80
       }
 
     #
@@ -80,7 +91,7 @@ module SynapseClient
       parse(response)
   end
 
-  def self.request_headers(client_id, client_secret)
+  def self.creds(client_id, client_secret)
     {
       :client_id     => client_id,
       :client_secret => client_secret
@@ -88,6 +99,10 @@ module SynapseClient
   end
 
   def self.execute_request(opts)
+puts "\n"
+puts "About to execute RestClient::Request with the following opts:"
+puts opts
+puts "\n"
     RestClient::Request.execute(opts)
   end
 
@@ -104,7 +119,7 @@ module SynapseClient
     #  raise general_api_error(response.code, response.body)
     #end
 
-    Map.new(response)
+    APIOperations::Response.new(response)
   end
 
 end
