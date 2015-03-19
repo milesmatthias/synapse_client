@@ -3,24 +3,28 @@ require 'spec_helper'
 describe SynapseClient do
 
   before(:each) do
-    SynapseClient.client_id     = test_credentials[:client_id]
-    SynapseClient.client_secret = test_credentials[:client_secret]
-    SynapseClient.dev           = test_credentials[:dev]
+    SynapseClient.client_id           = test_credentials.client_id
+    SynapseClient.client_secret       = test_credentials.client_secret
+    SynapseClient.merchant_synapse_id = test_credentials.merchant_synapse_id
+    SynapseClient.dev                 = test_credentials.dev
   end
-
 
   describe "api keys should be stored" do
     it 'stores the client_id on the top level module' do
-      expect(SynapseClient.client_id).to eq(test_credentials[:client_id])
+      expect(SynapseClient.client_id).to eq(test_credentials.client_id)
     end
 
     it 'stores the client_secret on the top level module' do
-      expect(SynapseClient.client_secret).to eq(test_credentials[:client_secret])
+      expect(SynapseClient.client_secret).to eq(test_credentials.client_secret)
+    end
+
+    it 'stores the merchant_synapse_id on the top level module' do
+      expect(SynapseClient.merchant_synapse_id).to eq(test_credentials.merchant_synapse_id)
     end
 
     it 'stores that dev is true' do
-      expect(SynapseClient.dev).to eq(test_credentials[:dev])
-      expect(SynapseClient.dev?).to eq(test_credentials[:dev])
+      expect(SynapseClient.dev).to eq(test_credentials.dev)
+      expect(SynapseClient.dev?).to eq(test_credentials.dev)
     end
   end
 

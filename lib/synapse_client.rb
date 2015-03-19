@@ -74,7 +74,7 @@ module SynapseClient
           headers[:content_type] = "application/x-www-form-urlencoded"
         else
           payload = creds(client_id, client_secret).update(params)
-          payload[:oauth_consumer_key] = params[:access_token] if params[:access_token]
+          payload[:oauth_consumer_key] = params.delete(:access_token) if params[:access_token]
           payload = payload.to_json
           headers[:content_type] = :json
         end

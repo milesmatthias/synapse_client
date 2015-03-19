@@ -3,25 +3,41 @@ require 'spec_helper'
 describe SynapseClient::Order do
 
   before(:each) do
-    @bank             = get_dummy_bank
+    @customer         = get_dummy_customer
+    @bank             = @customer.add_bank_account(dummy_add_bank_account_info)
     @amount_to_charge = rand(1..1000)
-    @new_order        = @bank.add_order({:amount => @amount_to_charge})
   end
 
+  describe "getting orders for a customer" do
+    it "should return an empty array" do
+      orders = @customer.orders
+
+      expect(orders).to be_an(Array)
+      expect(orders.count).to eq(0)
+    end
+  end
 
   describe "adding an order" do
     it "should successfully return an order." do
-      expect(@new_order).to be_a SynapseClient::Order
+      order = @customer.add_order({
+        :amount  => @amount_to_charge,
+        :bank_id => @bank.id
+      })
+      expect(order).to be_a SynapseClient::Order
 
-      expect(@new_order.amount).to eq(@amount_to_charge)
-      expect(@new_order.id).to be_a Fixnum
-      expect(@new_order.status).to be_a String
+      expect(order.amount).to eq(@amount_to_charge)
+      expect(order.id).to be_a Fixnum
+      expect(order.status).to be_a String
     end
   end
 
   describe "retrieving an order" do
     it "should successfully return an order." do
-      order = SynapseClient::Order.retrieve(@new_order.id)
+      new_order = @customer.add_order({
+        :amount  => @amount_to_charge,
+        :bank_id => @bank.id
+      })
+      order     = SynapseClient::Order.retrieve(new_order.id)
 
       expect(order).to be_a SynapseClient::Order
 

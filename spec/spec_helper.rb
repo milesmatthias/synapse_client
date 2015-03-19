@@ -8,14 +8,16 @@ require 'synapse_client'
 #
   def test_credentials
     Map.new({
-      :client_id     => "e06fa0f143a267c2ed8e",
-      :client_secret => "f578105bf9ae03d9310e0af6f4637c1bf363998b",
-      :dev           => true
+      :client_id           => "e06fa0f143a267c2ed8e",
+      :client_secret       => "f578105bf9ae03d9310e0af6f4637c1bf363998b",
+      :merchant_synapse_id => 1,
+      :dev                 => true
     })
   end
-  SynapseClient.client_id     = test_credentials.client_id
-  SynapseClient.client_secret = test_credentials.client_secret
-  SynapseClient.dev           = test_credentials.dev
+  SynapseClient.client_id           = test_credentials.client_id
+  SynapseClient.client_secret       = test_credentials.client_secret
+  SynapseClient.merchant_synapse_id = test_credentials.merchant_synapse_id
+  SynapseClient.dev                 = test_credentials.dev
 
 
 #

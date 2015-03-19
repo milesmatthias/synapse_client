@@ -1,25 +1,23 @@
 
 module SynapseClient
-  class Order
+  class Order < APIResource
+    include SynapseClient::APIOperations::List
 
     attr_reader :status
     attr_reader :amount
     attr_reader :seller_email
+    attr_reader :seller_id
     attr_reader :bank_pay
     attr_reader :bank_id
     attr_reader :note
     attr_reader :date_settled
     attr_reader :date
-    attr_reader :id
     attr_reader :ticket_number
     attr_reader :resource_uri
     attr_reader :account_type
     attr_reader :fee
-    attr_reader :seller_id
 
     def initialize(options = {})
-      options.to_options!.compact
-
       @status        = options[:status]
       @amount        = options[:amount]
       @seller_email  = options[:seller_email]
@@ -36,9 +34,6 @@ module SynapseClient
       @seller_id     = options[:seller_id]     || options[:seller].delete("seller_id") rescue nil
     end
 
-    # TODO - raise error if SynapseClient.merchant_synapse_id is not set.
-    # TODO - always send :bank_pay => true
-
     def submit(client)
       data = {
         :amount       => @amount,
@@ -51,6 +46,18 @@ module SynapseClient
 
       request  = SynapseClient::Request.new("/api/v2/order/add/", data, client)
       request.post
+    end
+
+    def self.all(params={})
+      orders = list(params, "recent").orders
+      orders.map{|order| Order.new(order)}
+    end
+
+    def self.create(params={})
+      response = SynapseClient.request(:post, url + "add", params)
+
+      return response unless response.successful?
+      Order.new(response.data.order)
     end
 
   end

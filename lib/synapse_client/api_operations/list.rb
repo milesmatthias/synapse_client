@@ -2,8 +2,8 @@ module SynapseClient
   module APIOperations
     module List
       module ClassMethods
-        def list(params={})
-          response = SynapseClient.request(:post, url + "show", params)
+        def list(params={}, list_action="show")
+          response = SynapseClient.request(:post, url + list_action, params)
           return response unless response.successful?
           response.data
         end

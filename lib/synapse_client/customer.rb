@@ -47,6 +47,14 @@ module SynapseClient
       # use http://synapsepay.readme.io/v1.0/docs/authentication-login
     end
 
+  #
+    def bank_accounts
+      BankAccount.all({:access_token => @access_token})
+    end
+    def primary_bank_account
+      @bank_accounts.select{|ba| ba.is_buyer_default}.first
+    end
+
     def add_bank_account(params={})
       BankAccount.add(params.merge({
         :access_token => @access_token,
@@ -58,6 +66,23 @@ module SynapseClient
       BankAccount.link(params.merge({
         :access_token => @access_token
       }))
+    end
+
+  #
+    def orders
+      Order.all({:access_token => @access_token})
+    end
+
+    def add_order(params={})
+      if SynapseClient.merchant_synapse_id.nil?
+        raise ArgumentError.new("You need to set SynapseClient.merchant_synapse_id before you can submit orders.")
+      else
+        Order.create(params.merge({
+          :access_token => @access_token,
+          :seller_id    => SynapseClient.merchant_synapse_id,
+          :bank_pay     => "yes"        # see README.md
+        }))
+      end
     end
 
 =begin
@@ -92,13 +117,6 @@ module SynapseClient
       request.post
     end
 =end
-
-    def bank_accounts
-      BankAccount.all({:access_token => @access_token})
-    end
-    def primary_bank_account
-      @bank_accounts.select{|ba| ba.is_buyer_default}.first
-    end
 
 
 private
