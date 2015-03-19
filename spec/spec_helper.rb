@@ -24,9 +24,10 @@ require 'synapse_client'
 #
   def dummy_customer_data
     hex = SecureRandom.hex(4)
+    hex[0] = hex[0].upcase
 
     Map.new({
-      :email       => "foo+" + hex + "@example.com",
+      :email       => "foo+" + hex.downcase + "@example.com",
       :fullname    => "Foo Bar " + hex,
       :phonenumber => sprintf('%010d', rand(10**10)),
       :ip_address  => Array.new(4){rand(256)}.join('.')
