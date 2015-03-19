@@ -1,12 +1,12 @@
 require 'synapse_client/merchant'
-require 'synapse_client/user'
+require 'synapse_client/customer'
 
 module SynapseClient
 
   class Client
 
     attr_reader :merchant
-    attr_reader :user
+    attr_reader :customer
     attr_reader :is_dev
 
     def initialize(options = {})
@@ -14,14 +14,14 @@ module SynapseClient
 
       @is_dev        = options[:devmode] #|| Rails.env.development? rescue false FIXME
       @merchant      = SynapseClient::Merchant.new(options)
-      @user          = SynapseClient::User.new(options)
+      @customer      = SynapseClient::Customer.new(options)
     end
 
     def link_account(options = {})
-      @user.link_account(options, self)
+      @customer.link_account(options, self)
     end
     def unlink_account(options = {})
-      @user.unlink_account(options, self)
+      @customer.unlink_account(options, self)
     end
 
     def finish_linking(options = {})
@@ -61,7 +61,7 @@ module SynapseClient
     end
 
     def get_bank_accounts
-      @user.get_bank_accounts(self)
+      @customer.get_bank_accounts(self)
     end
 
   end

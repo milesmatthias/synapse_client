@@ -25,8 +25,8 @@ module SynapseClient
       #
         if @message.present? && @message.match(/error.*oauth.*authentication/i).present?
           refreshed_tokens = SynapseClient::RefreshedTokens.new({
-              :old_access_token => @request.user_access_token,
-              :old_refresh_token => @request.user_refresh_token
+              :old_access_token => @request.customer_access_token,
+              :old_refresh_token => @request.customer_refresh_token
             })
 
           refreshed_tokens.refresh_old_tokens

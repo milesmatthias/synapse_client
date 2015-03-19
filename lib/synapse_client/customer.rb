@@ -1,6 +1,6 @@
 
 module SynapseClient
-  class User
+  class Customer
 
     attr_reader   :email
     attr_reader   :fullname

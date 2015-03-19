@@ -30,8 +30,8 @@ module SynapseClient
       elsif response["is_mfa"]
         SynapseClient::MFA.new(response["response"])
       else
-        client.user.add_bank_accounts response["banks"]
-        client.user.bank_accounts
+        client.customer.add_bank_accounts response["banks"]
+        client.customer.bank_accounts
       end
     end
 

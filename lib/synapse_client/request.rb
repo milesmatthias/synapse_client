@@ -4,8 +4,8 @@ require 'synapse_client/error'
 module SynapseClient
   class Request
 
-    attr_reader :user_access_token
-    attr_reader :user_refresh_token
+    attr_reader :customer_access_token
+    attr_reader :customer_refresh_token
     attr_reader :client_id
     attr_reader :client_secret
     attr_reader :device_id
@@ -18,14 +18,14 @@ module SynapseClient
     def initialize(path, data = {}, client = nil)
       client = SynapseClient::Client.new if client.nil?
 
-      @path               = path || ""
-      @payload            = data || {}
-      @user_refresh_token = client.user.refresh_token
-      @client_id          = client.merchant.client_id
-      @client_secret      = client.merchant.client_secret
-      @client             = client
-      @user_access_token  = client.user.access_token
-      @device_id          = client.merchant.device_id
+      @path                   = path || ""
+      @payload                = data || {}
+      @customer_refresh_token = client.customer.refresh_token
+      @client_id              = client.merchant.client_id
+      @client_secret          = client.merchant.client_secret
+      @client                 = client
+      @customer_access_token  = client.customer.access_token
+      @device_id              = client.merchant.device_id
     end
 
     def post
@@ -33,7 +33,7 @@ module SynapseClient
       data                      = @payload
       data[:client_id]          = @client_id
       data[:client_secret]      = @client_secret
-      data[:oauth_consumer_key] = @user_access_token
+      data[:oauth_consumer_key] = @customer_access_token
       data[:device_id]          = @device_id
 
       if @path.include?("oauth2")
