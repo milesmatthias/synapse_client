@@ -47,13 +47,17 @@ module SynapseClient
       # use http://synapsepay.readme.io/v1.0/docs/authentication-login
     end
 
-private
-    def update_attributes(data)
-      @access_token  = data.access_token
-      @refresh_token = data.refresh_token
-      @expires_in    = data.expires_in
-      @username      = data.username
-      return self
+    def add_bank_account(params={})
+      BankAccount.add(params.merge({
+        :access_token => @access_token,
+        :fullname     => @fullname
+      }))
+    end
+
+    def link_bank_account(params={})
+      BankAccount.link(params.merge({
+        :access_token => @access_token
+      }))
     end
 
 =begin
@@ -90,18 +94,21 @@ private
 =end
 
     def bank_accounts
-=begin
-      request  = SynapseClient::Request.new("/api/v2/bank/show/", {}, client)
-      response = request.post
-      unless response.instance_of?(SynapseClient::Error)
-        response["banks"].map{|b| SynapseClient::BankAccount.new(b)}
-      end
-=end
+      BankAccount.all({:access_token => @access_token})
     end
     def primary_bank_account
       @bank_accounts.select{|ba| ba.is_buyer_default}.first
     end
 
+
+private
+    def update_attributes(data)
+      @access_token  = data.access_token
+      @refresh_token = data.refresh_token
+      @expires_in    = data.expires_in
+      @username      = data.username
+      return self
+    end
 
   end
 end

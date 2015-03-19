@@ -4,6 +4,7 @@ require "map"
 require "restclient"
 require "synapse_client/api_resource"
 require "synapse_client/api_operations/response"
+require "synapse_client/api_operations/list"
 require "synapse_client/bank_account"
 require "synapse_client/client"
 require "synapse_client/error"
@@ -37,7 +38,13 @@ module SynapseClient
     base_api_url = "https://synapsepay.com"
     base_api_url = "https://sandbox.synapsepay.com" if dev?
 
-    base_api_url + ensure_trailing_slash(url)
+    ret = base_api_url + ensure_trailing_slash(url)
+
+    if dev?
+      ret + "?is_dev=true"
+    else
+      ret
+    end
   end
 
   def self.request(method, path, params={}, headers={}, client_id=nil, client_secret=nil, api_base_url=nil)

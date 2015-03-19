@@ -42,7 +42,7 @@ require 'synapse_client'
   def dummy_add_bank_account_info
     Map.new({
       :account_num   => "1111111111",
-      :routing_num   => "123456789",
+      :routing_num   => "084000026",
       :nickname      => "Example bank account",
       :account_type  => "1",
       :account_class => "1"
@@ -51,10 +51,16 @@ require 'synapse_client'
 
   def dummy_link_bank_account_info
     Map.new({
-      :username => "someusername",
-      :password => "somepassword",
+      :username => "synapse_good",
+      :password => "test1234",
       :pin      => "1234",
       :bank     => "Bank of America"
     })
   end
+
+  def get_dummy_bank
+    
+    SynapseClient::Customer.create(dummy_customer_data)
+  end
+
 

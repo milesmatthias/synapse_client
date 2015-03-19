@@ -26,12 +26,16 @@ describe SynapseClient do
 
 
   describe "url generation is correct" do
+    it "should have the is_dev query param" do
+      expect(SynapseClient.api_url).to eq("https://sandbox.synapsepay.com?is_dev=true")
+    end
+
     it "should have the sandbox domain" do
-      expect(SynapseClient.api_url).to eq("https://sandbox.synapsepay.com")
+      expect(SynapseClient.api_url).to match("https://sandbox.synapsepay.com")
     end
 
     it "should append a path to the url with a trailing slash" do
-      expect(SynapseClient.api_url("/foo")).to eq("https://sandbox.synapsepay.com/foo/")
+      expect(SynapseClient.api_url("/foo")).to match("https://sandbox.synapsepay.com/foo/")
     end
   end
 
