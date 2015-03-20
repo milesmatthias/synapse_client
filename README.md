@@ -96,9 +96,12 @@ _See the specs for the most up to date usage demo._
 
 ## TODO
 
-* Logging
-* Refresh access tokens
 * MFAs
+* View bank account
+* Refresh access tokens
+* Better synapse error handling
+* HTTP Error handling
+* Logging
 * Callbacks?
 
 # Links
