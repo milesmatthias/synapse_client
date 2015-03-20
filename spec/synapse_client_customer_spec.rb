@@ -34,6 +34,7 @@ describe SynapseClient::Customer do
       expect(customer.email).to eq @dummy_customer_data.email
       expect(customer.fullname).to eq @dummy_customer_data.fullname
       expect(customer.phonenumber).to eq @dummy_customer_data.phonenumber
+      expect(customer.username).to be_a String
     end
   end
 
