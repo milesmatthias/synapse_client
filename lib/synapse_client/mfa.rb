@@ -7,8 +7,6 @@ module SynapseClient
     attr_reader :bank_account_token
 
     def initialize(options = [])
-      options.to_options!.compact
-
       @bank_account_token = options[:access_token]
       @type               = options[:type]
 

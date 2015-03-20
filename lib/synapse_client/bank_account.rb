@@ -44,8 +44,37 @@ module SynapseClient
     def self.link(params={})
       response = SynapseClient.request(:post, url + "login", params)
       return response unless response.successful?
-      # TODO: handle MFA here.
-      BankAccount.new(response.data.bank)
+
+      if response.data["is_mfa"]
+        MFA.new(response.data.response)
+      else
+        response.data.banks.map do |bank|
+          BankAccount.new(bank)
+        end
+      end
+    end
+
+    def self.finish_linking(params={})
+      unless params[:bank]
+        raise ArgumentError.new("You must include the bank name when responding to an MFA question.")
+      end
+      unless params[:account_token]
+        raise ArgumentError.new("You must include the account token when responding to an MFA question.")
+      end
+      unless params[:mfa]
+        raise ArgumentError.new("You must include the answer(s) when responding to an MFA question.")
+      end
+
+      response = SynapseClient.request(:post, url + "mfa", params)
+      return response unless response.successful?
+
+      if response.data["is_mfa"]
+        MFA.new(response.data.response)
+      else
+        response.data.banks.map do |bank|
+          BankAccount.new(bank)
+        end
+      end
     end
 
   end

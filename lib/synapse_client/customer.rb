@@ -68,6 +68,12 @@ module SynapseClient
       }))
     end
 
+    def finish_linking_bank_account(params={})
+      BankAccount.finish_linking(params.merge({
+        :access_token => @access_token
+      }))
+    end
+
   #
     def orders
       Order.all({:access_token => @access_token})

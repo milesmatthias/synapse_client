@@ -94,15 +94,20 @@ _See the specs for the most up to date usage demo._
   SynapseClient::Order.retrieve(4)
 ```
 
-## TODO
+## TODO (in order of priority)
 
 * MFAs
+* MassPay
 * View bank account
 * Refresh access tokens
+* Security Questions
+* Deposits
+* Withdrawals
 * Better synapse error handling
 * HTTP Error handling
 * Logging
 * Callbacks?
+
 
 # Links
 

@@ -63,6 +63,13 @@ require 'synapse_client'
     })
   end
 
+  def dummy_finish_linking_bank_account_info
+    Map.new({
+      :mfa  => "some_answer",
+      :bank => "Bank of America"
+    })
+  end
+
   def get_dummy_bank
     
     SynapseClient::Customer.create(dummy_customer_data)
