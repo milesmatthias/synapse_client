@@ -29,22 +29,20 @@ module SynapseClient
     end
 
     def url
-      if self.id
-        "#{self.class.url}/#{CGI.escape(id)}"
-      else
-        self.class.url
-      end
+      self.class.url
     end
 
-    def refresh
-      response, opts = SynapseClient.request(:get, url, @retrieve_params)
-      refresh_from(response, opts)
+    def refresh(endpoint="")
+      response = SynapseClient.request(:post, url + endpoint, retrieve_params)
+
+      return response unless response.successful?
+      update_attributes(response.data[self.class.class_name.downcase])
     end
 
     def self.retrieve(id, opts={})
-      opts.merge(:id => id)
+      opts.merge!(:id => id)
       instance = self.new(opts)
-      instance.refresh
+      instance.refresh(retrieve_endpoint)
       instance
     end
 
