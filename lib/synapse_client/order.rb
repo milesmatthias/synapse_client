@@ -18,6 +18,8 @@ module SynapseClient
     attr_reader :fee
 
     def initialize(options = {})
+      options = Map.new(options)
+
       update_attributes(options)
     end
 

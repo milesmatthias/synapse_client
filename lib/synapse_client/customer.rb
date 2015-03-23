@@ -7,6 +7,8 @@ module SynapseClient
     attr_accessor :username
 
     def initialize(options = {})
+      options = Map.new(options)
+
       @id            = options[:id]            || options[:user_id]
       @email         = options[:email]
       @fullname      = options[:fullname]      || options[:name]

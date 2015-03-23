@@ -10,7 +10,7 @@ module SynapseClient
     attr_accessor :device_id
 
     def initialize(options ={})
-      options.to_options!.compact
+      options = Map.new(options)
 
       @client_id          = options[:client_id]          || ENV["SYNAPSE_CLIENT_ID"]
       @client_secret      = options[:client_secret]      || ENV["SYNAPSE_CLIENT_SECRET"]

@@ -8,7 +8,7 @@ module SynapseClient
     attr_reader :new_refresh_token
 
     def initialize(options = {})
-      options.to_options!.compact
+      options = Map.new(options)
 
       @old_access_token = options[:old_access_token]
       @old_refresh_token = options[:old_refresh_token]

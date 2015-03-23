@@ -6,7 +6,9 @@ module SynapseClient
     attr_reader :questions
     attr_reader :bank_access_token
 
-    def initialize(options=[])
+    def initialize(options={})
+      options = Map.new(options)
+
       @bank_access_token = options[:access_token]
       @type              = options[:type]
 

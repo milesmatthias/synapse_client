@@ -10,6 +10,8 @@ module SynapseClient
     attr_accessor :is_active, :is_buyer_default, :is_seller_default, :is_verified
 
     def initialize(options = {})
+      options = Map.new(options)
+
       @account_class         = options[:account_class]
       @account_number_string = options[:account_number_string]
       @account_type          = options[:account_type]
