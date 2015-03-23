@@ -14,6 +14,19 @@ I ripped originally wrote this in a rails app of mine and stripped this out. The
   * all orders are bank pay orders
   * customers do not have passwords
 
+## Installation
+
+Include the following in your `Gemfile`
+
+```ruby
+  gem "syanpse_client"
+```
+
+and then run `bundle install`.
+
+You can also simply run `gem install synapse_client`.
+
+
 ## Usage
 
 _See the specs for the most up to date usage demo._
