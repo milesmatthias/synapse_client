@@ -21,6 +21,7 @@ describe SynapseClient::BankAccount do
 
       expect(bank_account).to be_a SynapseClient::BankAccount
 
+      expect(bank_account.id).to be_a Fixnum
       expect(bank_account.account_number_string).to be_a String
       expect(bank_account.routing_number_string).to be_a String
       expect(bank_account.nickname).to be_a String
