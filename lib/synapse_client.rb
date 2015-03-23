@@ -58,7 +58,8 @@ module SynapseClient
       end
 
     #
-      url = api_url(path)
+      url     = api_url(path)
+      cookies = params.delete("cookies")
 
       case method.to_s.downcase.to_sym
       when :get, :head, :delete
@@ -71,8 +72,13 @@ module SynapseClient
           headers[:content_type] = "application/x-www-form-urlencoded"
         else
           payload = creds(client_id, client_secret).update(params)
+
+          # dealing with some naming inconsistencies in the api
           payload[:oauth_consumer_key] = payload.delete(:access_token) if payload[:access_token]
           payload[:oauth_consumer_key] = payload.delete("access_token") if payload["access_token"]
+          payload[:access_token] = payload.delete("bank_account_token") if payload["bank_account_token"]
+          payload[:access_token] = payload.delete(:bank_account_token) if payload[:bank_account_token]
+
           payload = payload.to_json
           headers[:content_type] = :json
         end
@@ -83,7 +89,7 @@ module SynapseClient
         :headers => headers,
         :method => method, :open_timeout => 30,
         :payload => payload,
-        :url => url, :timeout => 80
+        :url => url, :timeout => 80, :cookies => cookies
       }
 
     #
@@ -118,13 +124,13 @@ puts "\n"
 
   def self.parse(response)
     #begin
-      response = JSON.parse(response.body)
+      body = JSON.parse(response.body)
     #rescue JSON::ParserError
     #   TODO
     #  raise general_api_error(response.code, response.body)
     #end
 
-    APIOperations::Response.new(response)
+    APIOperations::Response.new(body, response.cookies)
   end
 
 end

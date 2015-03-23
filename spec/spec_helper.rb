@@ -65,7 +65,7 @@ require 'synapse_client'
 
   def dummy_finish_linking_bank_account_info
     Map.new({
-      :mfa  => "some_answer",
+      :mfa  => "test_answer",
       :bank => "Bank of America"
     })
   end

@@ -36,14 +36,14 @@ describe SynapseClient::BankAccount do
       expect(mfa).to be_a SynapseClient::MFA
 
       expect(mfa.type).to be_a String
-      expect(mfa.bank_account_token).to be_a String
+      expect(mfa.bank_access_token).to be_a String
       expect(mfa.questions).to be_an Array
     end
 
     it "should successfully finish linking with an mfa." do
       mfa           = @customer.link_bank_account(dummy_link_bank_account_info)
       bank_accounts = @customer.finish_linking_bank_account(dummy_finish_linking_bank_account_info.merge({
-        :account_token => mfa.bank_account_token
+        :bank_account_token => mfa.bank_access_token
       }))
 
       expect(bank_accounts).to be_a Array

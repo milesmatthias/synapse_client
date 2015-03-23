@@ -4,11 +4,11 @@ module SynapseClient
 
     attr_reader :type
     attr_reader :questions
-    attr_reader :bank_account_token
+    attr_reader :bank_access_token
 
-    def initialize(options = [])
-      @bank_account_token = options[:access_token]
-      @type               = options[:type]
+    def initialize(options=[])
+      @bank_access_token = options[:access_token]
+      @type              = options[:type]
 
       if @type == "questions"
         @questions = []

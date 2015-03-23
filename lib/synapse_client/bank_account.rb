@@ -58,8 +58,8 @@ module SynapseClient
       unless params[:bank]
         raise ArgumentError.new("You must include the bank name when responding to an MFA question.")
       end
-      unless params[:account_token]
-        raise ArgumentError.new("You must include the account token when responding to an MFA question.")
+      unless params[:bank_account_token]
+        raise ArgumentError.new("You must include the bank account token when responding to an MFA question.")
       end
       unless params[:mfa]
         raise ArgumentError.new("You must include the answer(s) when responding to an MFA question.")
