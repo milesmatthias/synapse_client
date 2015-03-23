@@ -61,12 +61,6 @@ describe SynapseClient::BankAccount do
     end
   end
 
-  describe "retrieving a bank account" do
-    it "should return a bank account" do
-      pending
-    end
-  end
-
 end
 
 
