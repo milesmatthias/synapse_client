@@ -110,10 +110,13 @@ module SynapseClient
   end
 
   def self.execute_request(opts)
-puts "\n"
-puts "SynapseClient: About to send a request with the following opts:"
-puts opts
-puts "\n"
+    if dev?
+      puts "\n"
+      puts "SynapseClient: About to send a request with the following opts:"
+      puts opts
+      puts "\n"
+    end
+
     RestClient::Request.execute(opts)
   end
 
