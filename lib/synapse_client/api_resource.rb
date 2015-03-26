@@ -46,5 +46,10 @@ module SynapseClient
       instance
     end
 
+    #
+    def successful?
+      true
+    end
+
   end
 end

@@ -12,6 +12,8 @@ describe SynapseClient::Customer do
     it "should successfully return a customer object with tokens and other info." do
       expect(@customer).to be_a SynapseClient::Customer
 
+      expect(@customer.successful?).to be true
+
       expect(@customer.email).to be @dummy_customer_data.email
       expect(@customer.fullname).to be @dummy_customer_data.fullname
       expect(@customer.phonenumber).to be @dummy_customer_data.phonenumber
