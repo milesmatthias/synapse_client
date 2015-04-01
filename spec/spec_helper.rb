@@ -71,7 +71,6 @@ require 'synapse_client'
   end
 
   def get_dummy_bank
-    
     SynapseClient::Customer.create(dummy_customer_data)
   end
 
