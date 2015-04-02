@@ -37,11 +37,14 @@ module SynapseClient
       update_attributes(response.data)
     end
 
-    def self.retrieve(access_token)
+    def self.retrieve(access_token, refresh_token)
       response = SynapseClient.request(:post, url + "show", {:access_token => access_token})
 
       return response unless response.successful?
-      Customer.new(response.data.user)
+      Customer.new(response.data.user.merge({
+        :access_token  => access_token,
+        :refresh_token => refresh_token
+      }))
     end
 
     # TODO
