@@ -5,7 +5,7 @@ module SynapseClient
     attr_accessor :id
 
     def self.class_name
-      self.name.split('::')[-1]
+      self.name.split('::').last
     end
 
     def self.api_resource_name
