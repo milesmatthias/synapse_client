@@ -18,8 +18,9 @@ I ripped originally wrote this in a rails app of mine and stripped this out. The
 
 If this gem has helped you and you'd like to show your appreciation, feel free to use one of the methods below to buy me coffee:
 
-[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.svg)](https://gratipay.com/milesmatthias/)
 [SquareCash](https://cash.me/$milesm)
+
+[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.svg)](https://gratipay.com/milesmatthias/)
 
 ## Installation
 
