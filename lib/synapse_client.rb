@@ -28,7 +28,7 @@ module SynapseClient
   def self.ensure_trailing_slash(url='')
     return url if url.empty?
     return url if url[-1] == "/"
-    return url + "/"
+    "#{ url }/"
   end
 
   def self.api_url(url='')
