@@ -10,29 +10,6 @@ describe SynapseClient::MassPay do
     @bank_account_b = @customer_b.add_bank_account(dummy_add_bank_account_info)
   end
 
-=begin
-
-  curl -H "Content-Type: application/json" -d '{  
-    "oauth_consumer_key":"dc236f737b6ba8ae6bcc4d786b221d15e51b1317",
-    "mass_pays":[  
-      {  
-        "amount":"20",
-        "trans_type":"0",
-        "source_bank_id":"579",
-        "dest_bank_id":"600"
-      },
-      {  
-        "amount":"10",
-        "trans_type":"0",
-        "source_bank_id":"579",
-        "dest_bank_id":"10"
-      }
-    ]
-  }'
-  https://sandbox.synapsepay.com/api/v2/masspay/add/
-
-=end
-
   describe "adding a bunch of deposits to users" do
     it "should successfully return multiple mass pays" do
 
