@@ -18,7 +18,7 @@ I ripped originally wrote this in a rails app of mine and stripped this out. The
 
 If this gem has helped you and you'd like to show your appreciation, feel free to use one of the methods below to buy me coffee:
 
-<img src="//img.shields.io/gratipay/milesmatthias.svg">
+[![Gratipay]("https://img.shields.io/gratipay/milesmatthias.svg")](https://gratipay.com/milesmatthias)
 https://cash.me/$milesm
 
 ## Installation
