@@ -14,6 +14,13 @@ I ripped originally wrote this in a rails app of mine and stripped this out. The
   * all orders are bank pay orders
   * customers do not have passwords
 
+## Want to show your appreciation?
+
+If this gem has helped you and you'd like to show your appreciation, feel free to use one of the methods below to buy me coffee:
+
+<img src="//img.shields.io/gratipay/milesmatthias.svg">
+https://cash.me/$milesm
+
 ## Installation
 
 Include the following in your `Gemfile`
