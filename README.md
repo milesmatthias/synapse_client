@@ -14,14 +14,6 @@ I ripped originally wrote this in a rails app of mine and stripped this out. The
   * all orders are bank pay orders
   * customers do not have passwords
 
-## Want to show your appreciation?
-
-If this gem has helped you and you'd like to show your appreciation, feel free to use one of the methods below to buy me coffee:
-
-[SquareCash](https://cash.me/$milesm)
-
-[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.svg)](https://gratipay.com/milesmatthias/)
-
 ## Installation
 
 Include the following in your `Gemfile`
@@ -132,4 +124,14 @@ _See the specs for the most up to date usage demo._
 
 * [dev.synapsepay.com](http://dev.synapsepay.com)
 * [rubygems.org/gems/synapse_client](https://rubygems.org/gems/synapse_client)
+
+
+## Want to show your appreciation?
+
+If this gem has helped you and you'd like to show your appreciation, feel free to use one of the methods below to buy me coffee:
+
+[SquareCash](https://cash.me/$milesm)
+
+[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.svg)](https://gratipay.com/milesmatthias/)
+
 
