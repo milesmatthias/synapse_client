@@ -18,7 +18,7 @@ module SynapseClient
       response = SynapseClient.request(:post, url + "add", params)
 
       return response unless response.successful?
-      response.data.masspays.map do |mp|
+      response.data.mass_pays.map do |mp|
         MassPay.new(mp)
       end
     end

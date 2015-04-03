@@ -14,7 +14,7 @@ describe SynapseClient::MassPay do
     it "should successfully return multiple mass pays" do
 
       params = { 
-        :access_token => @customer_b.access_token,
+        :access_token => @customer_a.access_token,
         :mass_pays => [{
           :amount => 20.to_s,
           :trans_type => 0.to_s,
@@ -30,14 +30,14 @@ describe SynapseClient::MassPay do
 
       masspays = SynapseClient::MassPay.create(params)
 
-      if !masspays.successful?
+      if !masspays.instance_of?(Array)
         puts "*** Error message: #{ masspays.error_msg }"
       end
 
-      expect(masspays.successful?).to be true
+      expect(masspays).to be_an Array
 
       masspays.each do |mp|
-        expect(mp.amount).to be_a Fixnum
+        expect(mp.amount).to be_a Float
         expect(mp.trans_type).to be_a Fixnum
         expect(mp.source_bank_id).to be_a Fixnum
         expect(mp.dest_bank_id).to be_a Fixnum
