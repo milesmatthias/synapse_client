@@ -19,7 +19,7 @@ I ripped originally wrote this in a rails app of mine and stripped this out. The
 Include the following in your `Gemfile`
 
 ```ruby
-  gem "syanpse_client"
+  gem "synapse_client"
 ```
 
 and then run `bundle install`.
