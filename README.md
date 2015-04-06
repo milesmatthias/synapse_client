@@ -4,7 +4,7 @@
 
 A ruby client for the SynapsePay.com API.
 
-I ripped originally wrote this in a rails app of mine and stripped this out. There's some work left to do to really make it a true ruby gem. See that in the todo section.
+I originally wrote this in a rails app of mine and stripped this out. There's some work left to do to really make it a true ruby gem. See that in the todo section.
 
 ## Notes
 
