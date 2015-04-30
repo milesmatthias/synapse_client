@@ -5,6 +5,7 @@ module SynapseClient
     attr_accessor :email, :fullname, :phonenumber, :ip_address
     attr_accessor :access_token, :refresh_token, :expires_in
     attr_accessor :username
+    attr_accessor :force_create
 
     def initialize(options = {})
       options = Map.new(options)
@@ -19,6 +20,8 @@ module SynapseClient
       @refresh_token = options[:refresh_token]
       @expires_in    = options[:expires_in]
       @username      = options[:username]
+
+      @force_create  = options[:force_create]
     end
 
     def self.api_resource_name
@@ -132,6 +135,7 @@ module SynapseClient
 
 private
     def update_attributes(data)
+      @id            = data.user_id
       @access_token  = data.access_token
       @refresh_token = data.refresh_token
       @expires_in    = data.expires_in
