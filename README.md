@@ -44,10 +44,11 @@ _See the specs for the most up to date usage demo._
 
 ```ruby
   SynapseClient::Customer.create({
-    :email       => "foo@example.com",
-    :fullname    => "Foo Bar,
-    :phonenumber => "5555555555",
-    :ip_address  => "8.8.8.8"
+    :email        => "foo@example.com",
+    :fullname     => "Foo Bar,
+    :phonenumber  => "5555555555",
+    :ip_address   => "8.8.8.8",
+    :force_create => true
   })
 ```
 
