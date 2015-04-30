@@ -4,7 +4,7 @@
 
 A ruby client for the SynapsePay.com API.
 
-I ripped originally wrote this in a rails app of mine and stripped this out. There's some work left to do to really make it a true ruby gem. See that in the todo section.
+I originally wrote this in a rails app of mine and stripped this out. There's some work left to do to really make it a true ruby gem. See that in the todo section.
 
 ## Notes
 
@@ -19,7 +19,7 @@ I ripped originally wrote this in a rails app of mine and stripped this out. The
 Include the following in your `Gemfile`
 
 ```ruby
-  gem "syanpse_client"
+  gem "synapse_client"
 ```
 
 and then run `bundle install`.
@@ -124,4 +124,14 @@ _See the specs for the most up to date usage demo._
 
 * [dev.synapsepay.com](http://dev.synapsepay.com)
 * [rubygems.org/gems/synapse_client](https://rubygems.org/gems/synapse_client)
+
+
+## Want to show your appreciation?
+
+If this gem has helped you and you'd like to show your appreciation, feel free to use one of the methods below to buy me coffee:
+
+[SquareCash](https://cash.me/$milesm)
+
+[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.svg)](https://gratipay.com/milesmatthias/)
+
 

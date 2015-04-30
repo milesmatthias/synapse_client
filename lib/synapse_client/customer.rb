@@ -5,6 +5,7 @@ module SynapseClient
     attr_accessor :email, :fullname, :phonenumber, :ip_address
     attr_accessor :access_token, :refresh_token, :expires_in
     attr_accessor :username
+    attr_accessor :force_create
 
     def initialize(options = {})
       options = Map.new(options)
@@ -19,6 +20,8 @@ module SynapseClient
       @refresh_token = options[:refresh_token]
       @expires_in    = options[:expires_in]
       @username      = options[:username]
+
+      @force_create  = options[:force_create]
     end
 
     def self.api_resource_name
@@ -37,11 +40,14 @@ module SynapseClient
       update_attributes(response.data)
     end
 
-    def self.retrieve(access_token)
+    def self.retrieve(access_token, refresh_token)
       response = SynapseClient.request(:post, url + "show", {:access_token => access_token})
 
       return response unless response.successful?
-      Customer.new(response.data.user)
+      Customer.new(response.data.user.merge({
+        :access_token  => access_token,
+        :refresh_token => refresh_token
+      }))
     end
 
     # TODO
@@ -129,6 +135,7 @@ module SynapseClient
 
 private
     def update_attributes(data)
+      @id            = data.user_id
       @access_token  = data.access_token
       @refresh_token = data.refresh_token
       @expires_in    = data.expires_in
