@@ -49,7 +49,7 @@ describe SynapseClient::Customer do
 
   describe "retrieving a customer" do
     it "should successfully return a customer object with tokens and other info." do
-      customer = SynapseClient::Customer.retrieve(@customer.access_token, @customer.refresh_token)
+      customer = SynapseClient::Customer.retrieve(@customer.access_token)
 
       expect(customer).to be_a SynapseClient::Customer
 
@@ -60,7 +60,6 @@ describe SynapseClient::Customer do
 
       expect(customer.id).to be_a Fixnum
       expect(customer.access_token).to be_a String
-      expect(customer.refresh_token).to be_a String
     end
   end
 
