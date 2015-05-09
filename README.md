@@ -111,8 +111,8 @@ _See the specs for the most up to date usage demo._
 ## TODO (in order of priority)
 
 * Better synapse error handling
+* Test for errors
 * HTTP Error handling
-* Logging
 * MassPay
 * Refresh access tokens
 * Security Questions
