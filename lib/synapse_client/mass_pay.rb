@@ -27,8 +27,8 @@ module SynapseClient
     def update_attributes(options)
       @amount         = options[:amount]
       @trans_type     = options[:trans_type]
-      @source_bank_id = options[:source_bank_id]
-      @dest_bank_id   = options[:dest_bank_id]
+      @source_bank_id = options[:source_bank_id].to_i
+      @dest_bank_id   = options[:dest_bank_id].to_i
     end
 
   end
