@@ -93,7 +93,7 @@ module SynapseClient
       else
         Order.create(params.merge({
           :access_token => @access_token,
-          :seller_id    => SynapseClient.merchant_synapse_id,
+          :seller_id    => params[:seller_id] || SynapseClient.merchant_synapse_id,
           :bank_pay     => "yes"        # see README.md
         }))
       end
