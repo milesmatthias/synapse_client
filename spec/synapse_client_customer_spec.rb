@@ -64,5 +64,25 @@ describe SynapseClient::Customer do
     end
   end
 
+  describe "refreshing a customer's token" do
+    it "should successfully get new oauth consumer key, refresh token, and expires in." do
+      customer = SynapseClient::Customer.retrieve(@customer.access_token, @customer.refresh_token)
+
+      old_access_token  = @customer.access_token.dup
+      old_refresh_token = @customer.refresh_token.dup
+
+      response = customer.refresh_tokens
+
+      expect(response).to be_a SynapseClient::Customer
+
+      expect(customer.access_token).to be_a String
+      expect(customer.refresh_token).to be_a String
+      expect(customer.expires_in).to be_a Fixnum
+
+      expect(customer.access_token).not_to be eq(old_access_token)
+      expect(customer.refresh_token).not_to be eq(old_refresh_token)
+    end
+  end
+
 end
 

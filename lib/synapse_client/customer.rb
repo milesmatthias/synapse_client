@@ -99,38 +99,20 @@ module SynapseClient
       end
     end
 
-=begin
-    def link_account(options = {}, client)
-      options.to_options!.compact
+    def refresh_tokens
+      rt = SynapseClient::RefreshedTokens.new({
+        :old_access_token  => @access_token,
+        :old_refresh_token => @refresh_token
+      }).refresh_old_tokens
 
-      data = {
-        :bank               => options[:bank_name],
-        :password           => options[:password],
-        :pin                => options[:pin] || "1234",
-        :username           => options[:username]
-      }
+      return rt if rt.instance_of?(SynapseClient::Error)
 
-      request  = SynapseClient::Request.new("/api/v2/bank/login/", data, client)
-      response = request.post
+      @access_token  = rt.new_access_token
+      @refresh_token = rt.new_refresh_token
+      @expires_in    = rt.new_expires_in
 
-      if response.instance_of?(SynapseClient::Error)
-        response
-      elsif response["is_mfa"]
-        SynapseClient::MFA.new(response["response"])
-      else
-        add_bank_accounts response["banks"]
-        @bank_accounts
-      end
+      return self
     end
-    def unlink_account(options = {}, client)
-      data = {
-        :bank_id => options.delete(:bank_id),
-      }
-
-      request  = SynapseClient::Request.new("/api/v2/bank/delete/", data, client)
-      request.post
-    end
-=end
 
 
 private

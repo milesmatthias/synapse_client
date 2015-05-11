@@ -2,15 +2,16 @@
 module SynapseClient
   class RefreshedTokens
 
-    attr_reader :old_access_token
-    attr_reader :old_refresh_token
-    attr_reader :new_access_token
-    attr_reader :new_refresh_token
+    attr_accessor :old_access_token
+    attr_accessor :old_refresh_token
+    attr_accessor :new_access_token
+    attr_accessor :new_refresh_token
+    attr_accessor :new_expires_in
 
     def initialize(options = {})
       options = Map.new(options)
 
-      @old_access_token = options[:old_access_token]
+      @old_access_token  = options[:old_access_token]
       @old_refresh_token = options[:old_refresh_token]
     end
 
@@ -20,18 +21,17 @@ module SynapseClient
         :refresh_token => @old_refresh_token
       }
 
-      request = SynapseClient::Request.new("/oauth2/access_token", data)
-      response = request.post
+      response = SynapseClient.request(:post, "/api/v2/user/refresh", data)
 
       unless response.instance_of?(SynapseClient::Error)
-        self.new_access_token  = response["access_token"]
-        self.new_refresh_token = response["refresh_token"]
+        @new_access_token  = response.data["oauth_consumer_key"]
+        @new_refresh_token = response.data["refresh_token"]
+        @new_expires_in    = response.data["expires_in"]
 
         return self
       else
         return response
       end
-
     end
 
   end
