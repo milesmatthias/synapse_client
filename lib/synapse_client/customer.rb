@@ -41,13 +41,22 @@ module SynapseClient
     end
 
     def self.retrieve(access_token, refresh_token)
-      response = SynapseClient.request(:post, url + "show", {:access_token => access_token})
+      response = Customer.get_user({
+              :access_token  => access_token,
+              :refresh_token => refresh_token
+            })
 
-      return response unless response.successful?
-      Customer.new(response.data.user.merge({
-        :access_token  => access_token,
-        :refresh_token => refresh_token
-      }))
+      unless response.successful? # refresh tokens & try once more.
+        new_tokens = Customer.refresh_tokens(access_token, refresh_token)
+        return new_tokens if new_tokens.instance_of?(SynapseClient::Error)
+        return Customer.get_user({
+            :access_token  => new_tokens.access_token,
+            :refresh_token => new_tokens.refresh_token,
+            :expires_in    => new_tokens.expires_in
+          })
+      end
+
+      response
     end
 
     # TODO
@@ -99,21 +108,30 @@ module SynapseClient
       end
     end
 
-    def refresh_tokens
+    def self.refresh_tokens(access_token, refresh_token)
       rt = SynapseClient::RefreshedTokens.new({
-        :old_access_token  => @access_token,
-        :old_refresh_token => @refresh_token
+        :old_access_token  => access_token,
+        :old_refresh_token => refresh_token
       }).refresh_old_tokens
 
       return rt if rt.instance_of?(SynapseClient::Error)
 
-      @access_token  = rt.new_access_token
-      @refresh_token = rt.new_refresh_token
-      @expires_in    = rt.new_expires_in
-
-      return self
+      Map.new({
+        :access_token  => rt.new_access_token,
+        :refresh_token => rt.new_refresh_token,
+        :expires_in    => rt.new_expires_in
+      })
     end
 
+    def self.get_user(opts={})
+      response = SynapseClient.request(:post, url + "show", {:access_token => opts[:access_token]})
+
+      return response unless response.successful?
+
+      opts.delete(:expires_in) if opts[:expires_in].nil?
+
+      Customer.new(response.data.user.merge(opts))
+    end
 
 private
     def update_attributes(data)
