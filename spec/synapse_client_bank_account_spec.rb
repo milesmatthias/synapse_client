@@ -29,6 +29,16 @@ describe SynapseClient::BankAccount do
       expect(bank_account.account_type).to be_a Fixnum
       expect(bank_account.account_class).to be_a Fixnum
     end
+
+    it "should return an error message with failed bank add attemp." do
+      bank_account = @customer.add_bank_account(dummy_wrong_add_bank_account_info)
+
+      expect(bank_account).to be_a SynapseClient::APIOperations::Response
+
+      expect(bank_account.successful?).to be false
+      expect(bank_account.error_msg).not_to be nil
+      expect(bank_account.error_msg).to be_a String
+    end
   end
 
   describe "linking a bank account" do

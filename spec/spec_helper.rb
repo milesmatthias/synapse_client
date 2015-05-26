@@ -70,6 +70,16 @@ require 'synapse_client'
     })
   end
 
+  def dummy_wrong_add_bank_account_info
+    Map.new({
+      :account_num   => "1",
+      :routing_num   => "8",
+      :nickname      => "Example bank account",
+      :account_type  => "1",
+      :account_class => "1"
+    })
+  end
+
   def get_dummy_bank
     SynapseClient::Customer.create(dummy_customer_data)
   end
