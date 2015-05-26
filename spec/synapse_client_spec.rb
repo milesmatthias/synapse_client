@@ -55,6 +55,8 @@ describe SynapseClient do
       expect { SynapseClient.request("get", "users") }.to raise_error
     end
 
+=begin
+    # THIS METHOD ISN'T SUPPORTED IN SANDBOX
     it "should be able to do a basic get of bank statuses" do
       response = SynapseClient.request("get", "/api/v2/bankstatus/show/")
 
@@ -64,6 +66,7 @@ describe SynapseClient do
       expect(response.data.banks).to be_an(Array)
       expect(response.data.banks.count).to be > 0
     end
+=end
   end
 
 end

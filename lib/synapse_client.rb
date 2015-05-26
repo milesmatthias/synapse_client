@@ -95,12 +95,21 @@ module SynapseClient
 
     #
       begin
+
         response = execute_request(request_opts)
-      # TODO: https://github.com/stripe/stripe-ruby/blob/master/lib/stripe.rb#L127
+
       rescue RestClient::Exception, Errno::ECONNREFUSED => e
+
+        begin
+         reason = JSON.parse(e.http_body)["reason"]
+        rescue => p
+          reason = e.http_body
+        end
+
         return SynapseClient::APIOperations::Response.new({
           :success     => false,
-          :status_code => e.http_code
+          :status_code => e.http_code,
+          :reason      => reason
         })
       end
 
