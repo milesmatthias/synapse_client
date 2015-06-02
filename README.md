@@ -110,9 +110,6 @@ _See the specs for the most up to date usage demo._
 
 ## TODO (in order of priority)
 
-* Better synapse error handling
-* Test for errors
-* HTTP Error handling
 * MassPay
 * Refresh access tokens
 * Security Questions
@@ -123,7 +120,7 @@ _See the specs for the most up to date usage demo._
 
 # Links
 
-* [dev.synapsepay.com](http://dev.synapsepay.com)
+* [synapsepay.readme.io/v2.0/docs](http://synapsepay.readme.io/v2.0/docs)
 * [rubygems.org/gems/synapse_client](https://rubygems.org/gems/synapse_client)
 
 
