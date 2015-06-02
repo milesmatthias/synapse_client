@@ -22,7 +22,7 @@ describe SynapseClient::Customer do
       expect(@customer.id).to be_a Fixnum
       expect(@customer.access_token).to be_a String
       expect(@customer.refresh_token).to be_a String
-      expect(@customer.expires_in).to be_a Fixnum
+      expect(@customer.expires_in).to be_a String
       expect(@customer.username).to be_a String
     end
 
@@ -42,7 +42,7 @@ describe SynapseClient::Customer do
       expect(@customer.id).to be_a Fixnum
       expect(@customer_dup.access_token).to be_a String
       expect(@customer_dup.refresh_token).to be_a String
-      expect(@customer_dup.expires_in).to be_a Fixnum
+      expect(@customer_dup.expires_in).to be_a String
       expect(@customer_dup.username).to be_a String
     end
   end
@@ -77,7 +77,7 @@ describe SynapseClient::Customer do
 
       expect(response.access_token).to be_a String
       expect(response.refresh_token).to be_a String
-      expect(response.expires_in).to be_a Fixnum
+      expect(response.expires_in).to be_a String
 
       expect(response.access_token).not_to be eq(old_access_token)
       expect(response.refresh_token).not_to be eq(old_refresh_token)
@@ -93,7 +93,7 @@ describe SynapseClient::Customer do
 
       expect(customer.access_token).to be_a String
       expect(customer.refresh_token).to be_a String
-      expect(customer.expires_in).to be_a Fixnum
+      expect(customer.expires_in).to be_a String
 
       expect(customer.access_token).not_to be eq(old_access_token)
       expect(customer.refresh_token).not_to be eq(old_refresh_token)

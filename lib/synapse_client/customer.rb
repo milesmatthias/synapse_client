@@ -136,7 +136,7 @@ module SynapseClient
 private
     def update_attributes(data)
       @id            = data.user_id
-      @access_token  = data.access_token
+      @access_token  = data.access_token rescue data.oauth_consumer_key
       @refresh_token = data.refresh_token
       @expires_in    = data.expires_in
       @username      = data.username
