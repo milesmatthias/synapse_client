@@ -41,9 +41,9 @@ describe SynapseClient::Order do
 
       expect(order).to be_a SynapseClient::Order
 
-      #expect(order.amount).to eq(@amount_to_charge)
-      #expect(order.id).to be_a Fixnum
       expect(order.status).to be_a Fixnum
+      expect(order.status_label).to be_a String
+      expect(order.status_description).to be_a String
     end
   end
 
