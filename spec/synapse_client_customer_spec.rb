@@ -27,7 +27,7 @@ describe SynapseClient::Customer do
     end
 
     it "should successfully return a customer when a dup user is created and force_create is used" do
-      @dup_data = @dummy_customer_data.merge(:force_create => true)
+      @dup_data = @dummy_customer_data.merge(:force_create => "no")
       @customer_dup = SynapseClient::Customer.create(@dup_data)
 
       expect(@customer_dup).to be_a SynapseClient::Customer
