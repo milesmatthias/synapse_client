@@ -8,8 +8,8 @@ require 'synapse_client'
 #
   def test_credentials
     Map.new({
-      :client_id              => "e06fa0f143a267c2ed8e",
-      :client_secret          => "f578105bf9ae03d9310e0af6f4637c1bf363998b",
+      :client_id              => "S2JuLaRWro3PjrHJ3Wha",
+      :client_secret          => "pWsKLv9pDiGPaBXCYfijOIlUOdXK24k8sjHd64EI",
       :merchant_synapse_id    => 536,
       :merchant_oauth_token   => "16688788f22d8b46a83711b42ad9b0dec39b09ce",
       :merchant_refresh_token => "37e6f092e3c9a5ad0c1a2f2c62fec6ab8cb44808",
