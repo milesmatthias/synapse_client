@@ -110,8 +110,8 @@ _See the specs for the most up to date usage demo._
 
 ## TODO (in order of priority)
 
+* Logger config
 * MassPay
-* Refresh access tokens
 * Security Questions
 * Deposits
 * Withdrawals
