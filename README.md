@@ -110,6 +110,8 @@ _See the specs for the most up to date usage demo._
 
 ## TODO (in order of priority)
 
+* Add SSN
+* Add KYC Documents
 * Logger config
 * MassPay
 * Security Questions
