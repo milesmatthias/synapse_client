@@ -43,6 +43,45 @@ require 'synapse_client'
     SynapseClient::Customer.create(dummy_customer_data)
   end
 
+  def base_kyc_info
+    Map.new({
+      :birth_day            => "05",
+      :birth_month          => "08",
+      :birth_year           => "1980",
+      :name_first           => "Bob",
+      :name_last            => "Barker",
+      :address_street_1     => "123 Animal Ct",
+      :address_postal_code  => "90210",
+      :address_country_code => "US"
+    })
+  end
+
+  def failure_kyc_info
+    base_kyc_info.merge({
+      :ssn => "1111"
+    })
+  end
+
+  def unverified_kyc_info
+    base_kyc_info.merge({
+      :ssn => "3333"
+    })
+  end
+
+  def verified_kyc_info
+    base_kyc_info.merge({
+      :ssn => "2222"
+    })
+  end
+
+  def kyc_verify_values(question_set)
+    questions = question_set.questions.map{|q| {:question_id => q.id, :answer_id => q.answers.sample.id}}
+    Map.new({
+      :id        => question_set.id,
+      :questions => questions
+    })
+  end
+
 #
   def dummy_add_bank_account_info
     Map.new({

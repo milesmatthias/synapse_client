@@ -15,6 +15,7 @@ require "synapse_client/refreshed_tokens"
 require "synapse_client/security_question"
 require "synapse_client/customer"
 require "synapse_client/util"
+require "synapse_client/question_set"
 require "synapse_client/version"
 
 module SynapseClient

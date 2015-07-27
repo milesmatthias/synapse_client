@@ -59,7 +59,28 @@ module SynapseClient
       response
     end
 
-    # TODO
+  #
+    def add_kyc_info(opts={})
+      response = SynapseClient.request(:post, "/api/v2/user/ssn/add", opts.merge({
+        :access_token => @access_token
+      }))
+
+      unless response.data["question_set"].nil?
+        return SynapseClient::QuestionSet.new(response.data.question_set)
+      else
+       return response
+      end
+    end
+
+    def verify_kyc_info(opts={})
+      response = SynapseClient.request(:post, "/api/v2/user/ssn/answer", opts.merge({
+        :access_token => @access_token
+      }))
+
+      return response
+    end
+
+  # TODO
     def login
       # use http://synapsepay.readme.io/v1.0/docs/authentication-login
     end

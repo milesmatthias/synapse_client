@@ -100,5 +100,49 @@ describe SynapseClient::Customer do
     end
   end
 
+  describe "adding failure kyc info for a customer" do
+    it "should return an error" do
+      response = @customer.add_kyc_info(failure_kyc_info)
+
+      expect(response.successful?).to be false
+      expect(response.error_msg).to be_a String
+    end
+  end
+
+  describe "adding unverified kyc info for a customer" do
+    it "should return ssn questions" do
+      response = @customer.add_kyc_info(unverified_kyc_info)
+
+      expect(response.successful?).to be true
+
+      expect(response).to be_a SynapseClient::QuestionSet
+
+      expect(response.questions).to be_an Array
+      expect(response.questions).not_to be_empty
+    end
+  end
+
+  describe "verifying ssn with question answers" do
+    it "should return success" do
+      response        = @customer.add_kyc_info(unverified_kyc_info)
+
+      expect(response).to be_a SynapseClient::QuestionSet
+
+      verify_response = @customer.verify_kyc_info(kyc_verify_values(response))
+
+      expect(verify_response.successful?).to be true
+      expect(verify_response.success).to be true
+    end
+  end
+
+  describe "adding successful kyc info for a customer" do
+    it "should return success" do
+      response = @customer.add_kyc_info(verified_kyc_info)
+
+      expect(response.successful?).to be true
+      expect(response.success).to be true
+    end
+  end
+
 end
 
