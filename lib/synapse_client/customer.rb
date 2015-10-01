@@ -60,6 +60,13 @@ module SynapseClient
     end
 
   #
+    def edit_info(opts={})
+      SynapseClient.request(:post, "/api/v2/user/edit", opts.merge({
+        :access_token => @access_token
+      }))
+    end
+
+  #
     def add_kyc_info(opts={})
       response = SynapseClient.request(:post, "/api/v2/user/ssn/add", opts.merge({
         :access_token => @access_token

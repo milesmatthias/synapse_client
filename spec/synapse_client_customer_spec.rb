@@ -64,6 +64,22 @@ describe SynapseClient::Customer do
     end
   end
 
+  describe "editing a customer" do
+    it "should successfully update a user's info" do
+
+      customer = SynapseClient::Customer.retrieve(@customer.access_token, @customer.refresh_token)
+
+      expect(customer).to be_a SynapseClient::Customer
+
+      new_pass = "changeme"
+
+      response = customer.edit_info(new_password: new_pass)
+
+      expect(response.success).to eq true
+      expect(response.data.user.email).to eq customer.email
+    end
+  end
+
   describe "refreshing and retrieving customer" do
     it "should successfully get new oauth consumer key, refresh token, and expires in." do
       customer = SynapseClient::Customer.retrieve(@customer.access_token, @customer.refresh_token)
